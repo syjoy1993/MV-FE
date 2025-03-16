@@ -1,8 +1,8 @@
-import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
+import { useMutation } from "@tanstack/react-query";
+import apiClient from "../api/apiClient";
 
 const deleteResume = async (resumeId) => {
-    await axios.delete(`http://localhost:8080/api/resume/${resumeId}`);
+    await apiClient.delete(`/api/resume/${resumeId}`);
 };
 
 const useDeleteResume = () => {

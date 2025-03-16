@@ -1,9 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
+import apiClient from '../api/apiClient';
 
 const uploadResume = async (formData) => {
     try {
-        const response = await axios.post('http://localhost:8080/api/resume', formData, {
+        const response = await apiClient.post('/api/resume', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },

@@ -1,8 +1,8 @@
-import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
+import { useMutation } from "@tanstack/react-query";
+import apiClient from "../api/apiClient";
 
 const deleteInterview = async (interviewId) => {
-    await axios.delete(`http://localhost:8080/api/interview/${interviewId}`);
+    await apiClient.delete(`/api/interview/${interviewId}`);
 };
 
 const useDeleteInterview = () => {

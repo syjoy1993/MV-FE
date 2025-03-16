@@ -1,17 +1,19 @@
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import apiClient from "../api/apiClient";
 
 const uploadInterviewFiles = async (audioFiles) => {
     const formData = new FormData();
-
     audioFiles.forEach((file) => {
         if (!file.questionId) return;
         formData.append("files", file.audioBlob, `audio_${file.questionId}.wav`);
     });
 
     try {
-        const response = await axios.post("http://localhost:8080/api/interview/end", formData, {
-            headers: { "Content-Type": "multipart/form-data" },
+        const response = await apiClient.post("/api/interview/end", formData, {
+            headers: {
+                ...apiClient.defaults.headers.common,
+                "Content-Type": "multipart/form-data",
+            },
         });
         return response.data;
     } catch (error) {

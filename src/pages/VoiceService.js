@@ -7,7 +7,8 @@ import useInterviewQuestion from "../hooks/useInterviewQuestion";
 import useInterviewEnd from "../hooks/useInterviewEnd";
 import { setInterviewId } from "../redux/interviewSlice";
 import { useDispatch } from "react-redux";
-import useInterviewStatus from "../hooks/useInterviewStatus";
+import useSubscriptionStatus from "../hooks/useSubscriptionStatus";
+import { useNavigate } from "react-router-dom";
 // MainContainer
 const VoiceServiceBox = styled.div`
     width: 100%;
@@ -400,14 +401,31 @@ const VoiceService = () => {
     const [isRecordingComplete, setIsRecordingComplete] = useState(false);
     const mediaRecorderRef = useRef(null);
     const audioChunksRef = useRef([]);
+    const navigate = useNavigate();
+    const { data: subscriptionData } = useSubscriptionStatus();
     const { data: resumeList } = useResumeList();
     const { data: interviewQuestions, isLoading, refetch } = useInterviewQuestion(resumeId && resumeId !== null ? resumeId : null);
     const { mutate: endInterview } = useInterviewEnd();
+    const filteredResumeList = resumeList?.filter(item => item.deleteStatus !== true);
+    useEffect(() => {
+        if (!subscriptionData || subscriptionData.length === 0) {
+            alert("구독 중인 이용권이 존재하지 않습니다.");
+            navigate("/mypage");
+        }
+    }, [subscriptionData, navigate]);
     useEffect(() => {
         if (resumeId) {
             refetch();
         }
     }, [resumeId]);
+
+    useEffect(() => {
+        if (!resumeList || filteredResumeList.length === 0) {
+            alert("사용 가능한 이력서가 없습니다. 등록 후 이용해주세요");
+            navigate("/myservice");
+        }
+    }, [resumeList, filteredResumeList, navigate]);
+
     const startRecording = async (questionId) => {
         if (recording) return;
 

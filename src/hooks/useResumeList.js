@@ -1,14 +1,14 @@
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import { useQuery } from "@tanstack/react-query";
+import apiClient from "../api/apiClient";
 
 const fetchResumes = async () => {
-    const { data } = await axios.get('http://localhost:8080/api/resume');
+    const { data } = await apiClient.get("/api/resume");
     return data;
 };
 
 const useResumeList = () => {
     return useQuery({
-        queryKey: ['resumes'],
+        queryKey: ["resumes"],
         queryFn: fetchResumes,
         refetchOnWindowFocus: false,
     });

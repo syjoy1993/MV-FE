@@ -1,9 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import apiClient from "../api/apiClient";
 
 const fetchSubscription = async () => {
-  const response = await axios.get("http://localhost:8080/api/subscription", {
-  });
+  const response = await apiClient.get("/api/subscription");
   return response.data;
 };
 

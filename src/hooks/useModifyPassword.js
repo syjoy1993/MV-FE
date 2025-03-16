@@ -1,16 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import apiClient from "../api/apiClient";
 
 const modifyPassword = async (passwordData) => {
-  const token = sessionStorage.getItem("token");
-
-  const response = await axios.post("http://localhost:8080/api/mypage/password", passwordData, {
-    headers: { 
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
+  const response = await apiClient.post("/api/mypage/password", passwordData);
   return response.data;
 };
 

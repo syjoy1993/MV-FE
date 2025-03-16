@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
+import apiClient from "../api/apiClient";
 
 const cancelSubscriptionAPI = async (subId) => {
-    const response = await axios.delete(`http://localhost:8080/api/subscription/${subId}`);
+    const response = await apiClient.delete(`/api/subscription/${subId}`);
     return response.data;
 };
 

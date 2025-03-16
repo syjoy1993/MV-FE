@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import apiClient from '../api/apiClient';
 
 const fetchInterviewStatus = async (interviewId) => {
-    const response = await axios.get(`http://localhost:8080/api/interview/${interviewId}/status`);
+    const response = await apiClient.get(`/api/interview/${interviewId}/status`);
     return response.data;
 };
 
@@ -15,8 +15,6 @@ const useInterviewStatus = () => {
         queryFn: () => fetchInterviewStatus(interviewId),
         enabled: !!interviewId,
         refetchInterval: 10000,
-        onSuccess: (data) => {
-        },
     });
 
     return { data, isLoading, isError };

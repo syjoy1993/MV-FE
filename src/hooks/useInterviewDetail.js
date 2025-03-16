@@ -1,18 +1,17 @@
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import { useQuery } from "@tanstack/react-query";
+import apiClient from "../api/apiClient";
 
 const fetchInterviewDetail = async (interviewId) => {
-    const { data } = await axios.get(`http://localhost:8080/api/interview/${interviewId}`);
+    const { data } = await apiClient.get(`/api/interview/${interviewId}`);
     return data;
 };
 
 const useInterviewDetail = (interviewId) => {
     return useQuery({
-        queryKey: ['interviewDetail', interviewId],
+        queryKey: ["interviewDetail", interviewId],
         queryFn: () => fetchInterviewDetail(interviewId),
         enabled: !!interviewId,
     });
 };
-
 
 export default useInterviewDetail;

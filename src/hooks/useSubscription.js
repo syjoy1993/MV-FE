@@ -1,10 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import apiClient from "../api/apiClient";
 
 const requestSubscription = async () => {
-  const response = await axios.post("https://da14-58-123-254-149.ngrok-free.app/api/subscription", {}, {
-  });
-
+  const response = await apiClient.post("/api/subscription");
   return response.data;
 };
 
@@ -14,6 +12,5 @@ const useSubscription = (onSuccess) => {
     onSuccess,
   });
 };
-
 
 export default useSubscription;

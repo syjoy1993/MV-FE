@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Main from "./pages/Main";
 import Login from "./pages/Login";
-import Test from "./pages/Test";
 import Layout from "./components/Layout";
 import Signup from "./pages/Signup";
 import About from "./pages/About";
@@ -11,8 +10,8 @@ import MyService from "./pages/Myservice.js";
 import Detail from "./pages/Detail";
 import MyPage from "./pages/MyPage.js"
 import VoiceService from "./pages/VoiceService.js";
-import GoogleLogin from "./components/GoogleLogin.js";
-import FormLogin from "./components/FormLogin.js";
+import MVLogin from "./components/MVLogin.js";
+
 
 function App() {
   
@@ -21,7 +20,6 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Main />} />
-          <Route path="/test" element={<Test />} />
           <Route path="/about" element={<About />} />
           <Route path="/service/voice" element={<VoiceService />} />
           <Route path="/service/video" element={"video"} />
@@ -31,9 +29,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/mypage" element={<MyPage />} />
+          <Route path="/mv-login" element={<MVLogin />} />
         </Route>
-        <Route path="/google-login" element={<GoogleLogin />} />
-        <Route path="/form-login" element={<FormLogin />} />
       </Routes>
     </Router>
   );
